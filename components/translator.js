@@ -11,6 +11,7 @@ const reverseDict = (obj) => {
 };
 
 class Translator {
+  
   toBritishEnglish(text) {
     const dict = { ...americanOnly, ...americanToBritishSpelling };
     const titles = americanToBritishTitles;
@@ -27,8 +28,9 @@ class Translator {
     }
     return translated;
   }
+
   toAmericanEnglish(text) {
-    const dict = { britishOnly, ...reverseDict(americanToBritishSpelling) };
+    const dict = { ...britishOnly, ...reverseDict(americanToBritishSpelling) };
     const titles = reverseDict(americanToBritishTitles);
     const timeRegex = /([1-9]|1[012]).[0-5][0-9]/g;
     const translated = this.translate(
@@ -45,7 +47,10 @@ class Translator {
   }
 
   translate(text, dict, titles, timeRegex, locale) {
-    const lowerText = text.toLowerCase();
+    let lowerText="";
+    if (typeof text === 'string') {
+    lowerText = text.toLowerCase();
+    }
     const matchesMap = {};
 
     // Search fot titles/honorifics and add them to the matchesMap object
